@@ -1,15 +1,13 @@
-def add_indicators(df):
-    df['MA20'] = df['Close'].rolling(window=20).mean()
-    df['MA50'] = df['Close'].rolling(window=50).mean()
-    df['UpperBand'] = df['MA20'] + 2 * df['Close'].rolling(window=20).std()
-    df['LowerBand'] = df['MA20'] - 2 * df['Close'].rolling(window=20).std()
-    df['Returns'] = df['Close'].pct_change()
-    df['RSI'] = compute_rsi(df['Close'])
-    return df.dropna()
 
-def compute_rsi(series, window=14):
-    delta = series.diff()
-    gain = (delta.where(delta > 0, 0)).rolling(window).mean()
-    loss = (-delta.where(delta < 0, 0)).rolling(window).mean()
-    rs = gain / loss
-    return 100 - (100 / (1 + rs))
+import pandas as pd
+import ta  # Technical Analysis library
+
+def add_advanced_indicators(df):
+    df['rsi'] = ta.momentum.RSIIndicator(df['Close']).rsi()
+    df['macd'] = ta.trend.MACD(df['Close']).macd()
+    df['bollinger_h'] = ta.volatility.BollingerBands(df['Close']).bollinger_hband()
+    df['bollinger_l'] = ta.volatility.BollingerBands(df['Close']).bollinger_lband()
+    df['atr'] = ta.volatility.AverageTrueRange(df['High'], df['Low'], df['Close']).average_true_range()
+    df['stochastic'] = ta.momentum.StochasticOscillator(df['High'], df['Low'], df['Close']).stoch()
+    df['volume_osc'] = ta.volume.OnBalanceVolumeIndicator(df['Close'], df['Volume']).on_balance_volume()
+    return df

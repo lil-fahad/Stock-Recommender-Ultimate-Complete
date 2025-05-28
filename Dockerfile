@@ -1,6 +1,12 @@
-FROM python:3.9
+
+FROM python:3.10-slim
+
 WORKDIR /app
-COPY requirements.txt ./
-RUN pip install -r requirements.txt
+
 COPY . .
-CMD ["uvicorn", "serve.inference_api:app", "--host", "0.0.0.0", "--port", "8000"]
+
+RUN pip install --upgrade pip &&     pip install -r requirements-upgraded.txt
+
+EXPOSE 8501
+
+CMD ["streamlit", "run", "dashboard/app.py", "--server.port=8501", "--server.address=0.0.0.0"]
