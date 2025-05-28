@@ -1,6 +1,22 @@
-FROM python:3.9
-WORKDIR /app
-COPY requirements.txt ./
-RUN pip install -r requirements.txt
-COPY . .
-CMD ["uvicorn", "serve.inference_api:app", "--host", "0.0.0.0", "--port", "8000"]
+version: "3.8"
+
+services:
+  api:
+    build: .
+    container_name: stock_api
+    ports:
+      - "8000:8000"
+    command: uvicorn serve.inference_api:app --host 0.0.0.0 --port 8000
+    volumes:
+      - .:/app
+
+  dashboard:
+    build: .
+    container_name: stock_dashboard
+    ports:
+      - "8501:8501"
+    command: streamlit run dashboard/app.py --server.port 8501 --server.address 0.0.0.0
+    volumes:
+      - .:/app
+    depends_on:
+      - api
