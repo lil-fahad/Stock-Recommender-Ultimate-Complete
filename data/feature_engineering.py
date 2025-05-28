@@ -1,7 +1,8 @@
-
 def add_indicators(df):
     df['MA20'] = df['Close'].rolling(window=20).mean()
     df['MA50'] = df['Close'].rolling(window=50).mean()
+    df['UpperBand'] = df['MA20'] + 2 * df['Close'].rolling(window=20).std()
+    df['LowerBand'] = df['MA20'] - 2 * df['Close'].rolling(window=20).std()
     df['Returns'] = df['Close'].pct_change()
     df['RSI'] = compute_rsi(df['Close'])
     return df.dropna()

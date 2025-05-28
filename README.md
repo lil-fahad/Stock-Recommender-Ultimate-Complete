@@ -1,11 +1,17 @@
+# 🚀 Ultimate Stock Recommender (God Mode Edition)
 
-# Stock Recommender Ultimate
+### How to run
+```
+docker-compose up --build
+```
 
-This project provides an advanced stock recommendation system using LSTM, XGBoost, and (future) Transformer models. It includes:
-- Data fetching from Polygon API
-- Feature engineering with technical indicators
-- LSTM model for time series prediction
-- XGBoost model for tabular predictions
-- FastAPI backend to serve predictions
-- Streamlit dashboard for visual display
-- Daily update script for continual learning
+### Access
+- FastAPI API: http://localhost:8000/docs
+- Streamlit Dashboard: http://localhost:8501
+
+### Features
+✅ Advanced Super LSTM + Attention + Transformer  
+✅ Ensemble predictions (LSTM + XGBoost)  
+✅ Daily automated retraining and update  
+✅ Beautiful Plotly dashboards  
+✅ Fully Dockerized microservice system

@@ -1,8 +1,7 @@
-
 import requests
 import pandas as pd
 
-API_KEY = 'vyje3A_Mvpeywm7ROMWQdrspgH2KIOBu'
+API_KEY = 'your_polygon_api_key'
 
 def get_polygon_data(symbol, start, end):
     url = f'https://api.polygon.io/v2/aggs/ticker/{symbol}/range/1/day/{start}/{end}?adjusted=true&sort=asc&limit=5000&apiKey={API_KEY}'
