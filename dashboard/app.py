@@ -15,7 +15,7 @@ if st.button("Load Data"):
 if st.button("Get Recommendation"):
     df = get_polygon_data(symbol, '2023-01-01', '2023-12-31')
     last_20 = df['Close'][-20:].tolist()
-response = requests.post("https://my-fastapi-backend.onrender.com/predict", json={"features": last_20})
+    response = requests.post("https://my-fastapi-backend.onrender.com/predict", json={"features": last_20})
     if response.status_code == 200:
         pred = response.json()['prediction']
         st.success(f"Predicted Next Close Price: ${pred:.2f}")
