@@ -1,0 +1,12 @@
+torch
+transformers
+xgboost
+scikit-learn
+pandas
+numpy
+matplotlib
+fastapi
+uvicorn
+streamlit
+joblib
+requests
